@@ -4,19 +4,19 @@ const data = {
         {
             name: 'BikoFlakes',
             slug: 'flakes',
-            category: 'desert',
+            category: 'Desert',
             image: '/images/Flakes.jpg',
             price: 420,
             rating: 4.5,
             provider: 'Biko',
             numReviews: 69,
-            description: 'A delicious icecream made with love and care',
+            description: 'Flakes from and for Biko made with his own hands',
 
         },
         {
             name: 'Pizza',
             slug: 'pizza',
-            category: 'pizza',
+            category: 'Pizza',
             image: '/images/pizza.jpg',
             price: 11.99,
             provider: 'PizzaBlitz',
@@ -28,7 +28,7 @@ const data = {
         {
             name: 'Döner',
             slug: 'kebab',
-            category: 'kebab',
+            category: 'Kebab',
             image: '/images/kebab.jpg',
             price: 4,
             provider: 'Onkel Grill',
@@ -40,7 +40,7 @@ const data = {
         {
             name: 'Soup',
             slug: 'soup',
-            category: 'soup',
+            category: 'Soup',
             image: '/images/soup.jpg',
             price: 3.99,
             provider: 'Ganesha',
@@ -52,7 +52,7 @@ const data = {
         {
             name: 'Spaghetti',
             slug: 'spaghetti',
-            category: 'noodles',
+            category: 'Noodles',
             image: '/images/spaghetti.jpg',
             price: 3.99,
             provider: 'Venecia',
@@ -65,7 +65,7 @@ const data = {
         {
             name: 'American Burger',
             slug: 'burger',
-            category: 'burger',
+            category: 'Burger',
             image: '/images/burger.jpg',
             price: 7.99,
             provider: 'Bullburger' ,
