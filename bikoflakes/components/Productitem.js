@@ -22,7 +22,7 @@ export default function Productitem({ product }) {
                      </Link>
               <p className="mb-2">{product.provider}</p>
               <p >€{product.price}</p>
-              <button clasName="primary-button" type="button">
+              <button className="primary-button" type="button">
                   Add to Cart
               </button>
              </div> 
