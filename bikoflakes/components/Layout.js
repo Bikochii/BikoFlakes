@@ -37,14 +37,14 @@ export default function Layout({ title, children }) {
                                   )}
                               </a>
                           </Link>
-                          <Link href='/Login'>
+                          <Link href='/login'>
                               <a className='p-2'>Login</a>
                           </Link>
                       </div>
                   </nav>
               </header>
               <main className='container m-auto mt-4 px-4'>{children}</main>
-              <footer className='flex h-10 justify-center items-center shadow-inner'>
+              <footer className='flex h-10 justify-start p-5 items-center shadow-inner'>
                   <p>Copyright © 2023 BikoFlakes </p>
               </footer>
           </div>

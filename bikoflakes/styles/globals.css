@@ -20,9 +20,15 @@ a {
 }
 
 .card{
-  @apply mb-5 block rounded-lg border border-gray-200 shadow-md;
+  @apply mb-5  block    rounded-lg border border-gray-200  shadow-md;
 }
 
 .primary-button{
   @apply rounded bg-amber-500 py-2 px-4 shadow outline-none hover:bg-amber-600 active:bg-amber-700;
+}
+
+input,
+select,
+textarea{
+  @apply rounded border p-2 outline-none ring-indigo-300 focus:ring;
 }

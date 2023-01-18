@@ -7,18 +7,20 @@ import { Store } from '../utils/Store';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 
+
 function CartScreen() {
-  const router = useRouter();
+
   const { state, dispatch } = useContext(Store);
+  const router = useRouter();
   const {
     cart: { cartItems },
-  } = state;
+  } = state; 
   const removeItemHandler = (item) => {
     dispatch({ type: 'CART_REMOVE_ITEM', payload: item });
     };
     const updateCartHandler = (item, qty) => {
         const quantity = Number(qty);
-        dispatch({ type: 'CART_ADD_ITEM', payload: { ...item, quantity } });
+        dispatch({ type: 'CART_ADD_ITEM', payload: {...item, quantity } });
     };
   return (
     <Layout title="Shopping Cart">
@@ -55,7 +57,8 @@ function CartScreen() {
                           {item.name}
                         </a>
                       </Link>
-                        </td>
+                    </td>
+                    
                          <td className="p-5 text-right">
                       <select
                         value={item.quantity}
@@ -70,6 +73,7 @@ function CartScreen() {
                         ))}
                       </select>
                     </td>
+
                     <td className="p-5 text-right">${item.price}</td>
                     <td className="p-5 text-center">
                       <button onClick={() => removeItemHandler(item)}>
@@ -93,7 +97,8 @@ function CartScreen() {
                 <button
                   onClick={() => router.push('/shipping')}
                   className="primary-button w-full"
-                >
+                  >
+                    <Link href="shipping">Register</Link>
                   Check Out
                 </button>
               </li>

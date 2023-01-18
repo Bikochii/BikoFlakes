@@ -8,6 +8,7 @@ export default function Productitem({ product }) {
           <Link href={`/product/${product.slug}`}>
               <a>
                   <img
+                     // src="https://joqwtcqtucsiandrqizn.supabase.co//storage/v1/object/public/images/burger.jpg"
                       src={product.image}
                       alt={product.name}
                       className="rounded shadow"
