@@ -7,21 +7,19 @@ import { Store } from '../utils/Store';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 
-
 function CartScreen() {
-
   const { state, dispatch } = useContext(Store);
   const router = useRouter();
   const {
     cart: { cartItems },
-  } = state; 
+  } = state;
   const removeItemHandler = (item) => {
     dispatch({ type: 'CART_REMOVE_ITEM', payload: item });
-    };
-    const updateCartHandler = (item, qty) => {
-        const quantity = Number(qty);
-        dispatch({ type: 'CART_ADD_ITEM', payload: {...item, quantity } });
-    };
+  };
+  const updateCartHandler = (item, qty) => {
+    const quantity = Number(qty);
+    dispatch({ type: 'CART_ADD_ITEM', payload: { ...item, quantity } });
+  };
   return (
     <Layout title="Shopping Cart">
       <h1 className="mb-4 text-xl">Shopping Cart</h1>
@@ -47,25 +45,26 @@ function CartScreen() {
                     <td>
                       <Link href={`/product/${item.slug}`}>
                         <a className="flex items-center">
-                          <Image
+                          <img
                             src={item.image}
                             alt={item.name}
                             width={50}
                             height={50}
-                          ></Image>
+                          ></img>
                           &nbsp;
                           {item.name}
                         </a>
                       </Link>
                     </td>
-                    
-                         <td className="p-5 text-right">
+
+                    <td className="p-5 text-right">
                       <select
                         value={item.quantity}
                         onChange={(e) =>
                           updateCartHandler(item, e.target.value)
                         }
                       >
+                        {console.log(item)}
                         {[...Array(item.countInStock).keys()].map((x) => (
                           <option key={x + 1} value={x + 1}>
                             {x + 1}
@@ -97,8 +96,8 @@ function CartScreen() {
                 <button
                   onClick={() => router.push('/shipping')}
                   className="primary-button w-full"
-                  >
-                    <Link href="shipping">Register</Link>
+                >
+                  <Link href="shipping">Register</Link>
                   Check Out
                 </button>
               </li>
