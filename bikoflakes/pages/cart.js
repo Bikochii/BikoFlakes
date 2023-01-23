@@ -97,7 +97,6 @@ function CartScreen() {
                   onClick={() => router.push('/shipping')}
                   className="primary-button w-full"
                 >
-                  <Link href="shipping">Register</Link>
                   Check Out
                 </button>
               </li>

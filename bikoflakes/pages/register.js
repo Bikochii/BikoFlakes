@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useSupabaseClient, useSession } from '@supabase/auth-helpers-react';
 
-export default function LoginScreen() {
+export default function RegisterScreen() {
   const supabase = useSupabaseClient();
   console.log(supabase);
   const router = useRouter();
@@ -16,6 +16,7 @@ export default function LoginScreen() {
   const {
     handleSubmit,
     register,
+    getValues,
     formState: { errors },
   } = useForm();
 
@@ -23,15 +24,16 @@ export default function LoginScreen() {
     console.log(email, password);
   };
 
-  async function login(email, password) {
-    console.log(supabase);
+  async function signUp(email, password) {
+    console.log(email, password);
     try {
-      const { error } = await supabase.auth.signInWithPassword({
+      const { data, error } = await supabase.auth.signUp({
         email: 'anton.pelezki@gmail.com',
         password: '123456789',
       });
+      console.log(data, error);
       if (error) throw error;
-      alert(' you successfully loged in!');
+      alert('you just signed Up!');
       router.push('/');
     } catch (error) {
       alert(error.message);
@@ -39,12 +41,32 @@ export default function LoginScreen() {
   }
 
   return (
-    <Layout title="Login">
+    <Layout title="Register">
       <form
         className="mx-auto max-w-screen-md"
         onSubmit={handleSubmit(submitHandler)}
       >
-        <h1 className="mb-4 text-xl">Login</h1>
+        <h1 className="mb-4 text-xl">Register</h1>
+
+        <div className="mb-4">
+          <label htmlFor="name">Full Name</label>
+          <input
+            type="name"
+            {...register('name', {
+              required: 'Please enter your name',
+              pattern: {
+                message: 'Please enter your name',
+              },
+            })}
+            className="w-full"
+            id="name"
+            autoFocus
+          ></input>
+          {errors.name && (
+            <div className="text-red-700">{errors.name.message}</div>
+          )}
+        </div>
+
         <div className="mb-4">
           <label htmlFor="email">E-mail</label>
 
@@ -84,17 +106,25 @@ export default function LoginScreen() {
             <div className="text-red-700">{errors.password.message}</div>
           )}
         </div>
+
+        <div className="mb-4">
+          <label htmlFor="confirmPassword">Confirm Password</label>
+          <input type="password" className="w-full" id="confirmpassword" />
+        </div>
+
         <div className="mb-4">
           <button
             className="primary-button"
-            onClick={() => login(email, password)}
+            onClick={() => signUp(email, password)}
           >
-            Login
+            SignUp
           </button>
         </div>
         <div className="mb-4">
-          No account yet?
-          <Link href="register"> Register</Link>
+          Already have an account?
+          <Link className="text-blue-600" href="login">
+            &nbsp;Login
+          </Link>
         </div>
       </form>
     </Layout>
