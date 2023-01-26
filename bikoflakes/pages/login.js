@@ -1,18 +1,18 @@
-import Link from 'next/link';
-import React from 'react';
-import Layout from '../components/Layout';
-import { useForm } from 'react-hook-form';
+import Link from "next/link";
+import React from "react";
+import Layout from "../components/Layout";
+import { useForm } from "react-hook-form";
 //import { supabase } from '@supabase/supabase-js'
-import { useState } from 'react';
-import { useRouter } from 'next/router';
-import { useSupabaseClient, useSession } from '@supabase/auth-helpers-react';
+import { useState } from "react";
+import { useRouter } from "next/router";
+import { useSupabaseClient, useSession } from "@supabase/auth-helpers-react";
 
 export default function LoginScreen() {
   const supabase = useSupabaseClient();
   console.log(supabase);
   const router = useRouter();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const {
     handleSubmit,
     register,
@@ -27,12 +27,12 @@ export default function LoginScreen() {
     console.log(supabase);
     try {
       const { error } = await supabase.auth.signInWithPassword({
-        email: 'anton.pelezki@gmail.com',
-        password: '123456789',
+        email,
+        password,
       });
       if (error) throw error;
-      alert(' you successfully loged in!');
-      router.push('/');
+      alert(" you successfully loged in!");
+      router.push("/");
     } catch (error) {
       alert(error.message);
     }
@@ -50,14 +50,15 @@ export default function LoginScreen() {
 
           <input
             type="email"
-            {...register('email', {
-              required: 'Please enter email',
+            {...register("email", {
+              required: "Please enter email",
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: 'Invalid email address',
+                message: "Invalid email address",
               },
             })}
             className="w-full"
+            onChange={(e) => setEmail(e.target.value)}
             id="email"
             autoFocus
           ></input>
@@ -69,14 +70,15 @@ export default function LoginScreen() {
           <label htmlFor="password">Password</label>
           <input
             type="password"
-            {...register('password', {
-              required: 'Please enter password',
+            {...register("password", {
+              required: "Please enter password",
               minLength: {
                 value: 6,
-                message: 'password must have at least 6 characters',
+                message: "password must have at least 6 characters",
               },
             })}
             className="w-full"
+            onChange={(e) => setPassword(e.target.value)}
             id="password"
             autoFocus
           ></input>

@@ -1,18 +1,19 @@
-import Link from 'next/link';
-import React from 'react';
-import Layout from '../components/Layout';
-import { useForm } from 'react-hook-form';
+import Link from "next/link";
+import React from "react";
+import Layout from "../components/Layout";
+import { useForm } from "react-hook-form";
 //import { supabase } from '@supabase/supabase-js'
-import { useState } from 'react';
-import { useRouter } from 'next/router';
-import { useSupabaseClient, useSession } from '@supabase/auth-helpers-react';
+import { useState } from "react";
+import { useRouter } from "next/router";
+import { useSupabaseClient, useSession } from "@supabase/auth-helpers-react";
 
 export default function RegisterScreen() {
   const supabase = useSupabaseClient();
   console.log(supabase);
   const router = useRouter();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [password, setPassword] = useState("");
   const {
     handleSubmit,
     register,
@@ -25,18 +26,21 @@ export default function RegisterScreen() {
   };
 
   async function signUp(email, password) {
-    console.log(email, password);
-    try {
-      const { data, error } = await supabase.auth.signUp({
-        email: 'anton.pelezki@gmail.com',
-        password: '123456789',
-      });
-      console.log(data, error);
-      if (error) throw error;
-      alert('you just signed Up!');
-      router.push('/');
-    } catch (error) {
-      alert(error.message);
+    if (password === confirmPassword) {
+      try {
+        const { data, error } = await supabase.auth.signUp({
+          email,
+          password,
+        });
+        console.log(data, error);
+        if (error) throw error;
+        alert("you just signed Up!");
+        router.push("/");
+      } catch (error) {
+        alert(error.message);
+      }
+    } else {
+      alert("The passwords do not match");
     }
   }
 
@@ -49,13 +53,13 @@ export default function RegisterScreen() {
         <h1 className="mb-4 text-xl">Register</h1>
 
         <div className="mb-4">
-          <label htmlFor="name">Full Name</label>
+          <label htmlFor="name">Full Name *</label>
           <input
             type="name"
-            {...register('name', {
-              required: 'Please enter your name',
+            {...register("name", {
+              required: "Please enter your name",
               pattern: {
-                message: 'Please enter your name',
+                message: "Please enter your name",
               },
             })}
             className="w-full"
@@ -68,18 +72,19 @@ export default function RegisterScreen() {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="email">E-mail</label>
+          <label htmlFor="email">E-mail *</label>
 
           <input
             type="email"
-            {...register('email', {
-              required: 'Please enter email',
+            {...register("email", {
+              required: "Please enter email",
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: 'Invalid email address',
+                message: "Invalid email address",
               },
             })}
             className="w-full"
+            onChange={(e) => setEmail(e.target.value)}
             id="email"
             autoFocus
           ></input>
@@ -88,17 +93,18 @@ export default function RegisterScreen() {
           )}
         </div>
         <div className="mb-4">
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">Password *</label>
           <input
             type="password"
-            {...register('password', {
-              required: 'Please enter password',
+            {...register("password", {
+              required: "Please enter password",
               minLength: {
                 value: 6,
-                message: 'password must have at least 6 characters',
+                message: "password must have at least 6 characters",
               },
             })}
             className="w-full"
+            onChange={(e) => setPassword(e.target.value)}
             id="password"
             autoFocus
           ></input>
@@ -108,8 +114,23 @@ export default function RegisterScreen() {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="confirmPassword">Confirm Password</label>
-          <input type="password" className="w-full" id="confirmpassword" />
+          <label htmlFor="confirmPassword">Confirm Password *</label>
+          <input
+            {...register("confirmPassword", {
+              required: "Please confirm your password",
+              minLength: {
+                value: 6,
+                message: "Please confirm your password",
+              },
+            })}
+            type="password"
+            className="w-full"
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            id="confirmPassword"
+          ></input>
+          {errors.confirmPassword && (
+            <div className="text-red-700">{errors.confirmPassword.message}</div>
+          )}
         </div>
 
         <div className="mb-4">
@@ -121,6 +142,8 @@ export default function RegisterScreen() {
           </button>
         </div>
         <div className="mb-4">
+          * required!
+          <br></br>
           Already have an account?
           <Link className="text-blue-600" href="login">
             &nbsp;Login
