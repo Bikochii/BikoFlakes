@@ -18,17 +18,17 @@ export default function PlaceOrderScreen() {
 
       <div className="grid md:grid-cols-4 md:gap-5">
         <div className="overflow-x-auto md:col-span-3">
-          <div className="card  p-5">
+          <div className="card p-5">
             <h2 className="mb-2 text-lg">Shipping Address</h2>
             <div className="text-l font-bold">
-              Anton Pelezki <br></br>
+              Anton Pelezki <br />
               Stuifenstraße 4 73525 Schwäbisch Gmünd
             </div>
             <div>
               <Link href="/shipping">Edit</Link>
             </div>
           </div>
-          <div className="card  p-5">
+          <div className="card p-5">
             <h2 className="mb-2 text-lg">Payment Method</h2>
             <div className="text-l font-bold">Bitcoin</div>
             <div>
@@ -41,8 +41,8 @@ export default function PlaceOrderScreen() {
               <thead className="border-b">
                 <tr>
                   <th className="px-5 text-left">Item</th>
-                  <th className="    p-5 text-right">Quantity</th>
-                  <th className="  p-5 text-right">Price</th>
+                  <th className="p-5 text-right">Quantity</th>
+                  <th className="p-5 text-right">Price</th>
                   <th className="p-5 text-right">Subtotal</th>
                 </tr>
               </thead>
@@ -58,9 +58,9 @@ export default function PlaceOrderScreen() {
                       </Link>
                     </td>
                     <td className=" p-5 text-right">{item.quantity}</td>
-                    <td className="p-5 text-right">${item.price}</td>
+                    <td className="p-5 text-right">€{item.price}</td>
                     <td className="p-5 text-right">
-                      ${item.quantity * item.price}
+                      €{item.quantity * item.price}
                     </td>
                   </tr>
                 ))}
@@ -97,9 +97,7 @@ export default function PlaceOrderScreen() {
               <li>
                 <button
                   className="primary-button w-full"
-                  onClick={() =>
-                    alert('Order has been placed') && router.push('//')
-                  }
+                  onClick={() => router.push('/')}
                 >
                   Place Order
                 </button>
