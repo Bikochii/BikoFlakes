@@ -1,16 +1,14 @@
-import React from "react";
-import MultiStep from "../components/MultiStep";
-import Layout from "../components/Layout";
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/router";
+import React from 'react';
+import MultiStep from '../components/MultiStep';
+import Layout from '../components/Layout';
+import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
 
 export default function payment() {
   const router = useRouter();
-  const {
-    formState: { errors },
-  } = useForm();
+
   const submitHandler = () => {
-    router.push("/payment");
+    router.push('/placeorder');
   };
   return (
     <Layout title="Payment Option">
@@ -20,9 +18,9 @@ export default function payment() {
 
         <div className="mb-4">
           <input
-            id="paypal"
-            label="PayPal"
-            name="paymentOption"
+            id="cash"
+            label="Cash"
+            name="cash"
             className="p-2 outline-none focus:ring-0"
             type="radio"
           />
@@ -31,9 +29,9 @@ export default function payment() {
 
         <div className="mb-4">
           <input
-            id="paypal"
-            label="PayPal"
-            name="paymentOption"
+            id="Bitcoin"
+            label="Bitcoin"
+            name="bitcoin"
             className="p-2 outline-none focus:ring-0"
             type="radio"
           />
@@ -44,22 +42,27 @@ export default function payment() {
           <input
             id="paypal"
             label="PayPal"
-            name="paymentOption"
+            name="Paypal"
             className="p-2 outline-none focus:ring-0"
             type="radio"
           />
-          <label className="p-2">Cash on Kralle</label>
+          <label className="p-2">Paypal</label>
         </div>
 
         <div className="mb- flex justify-between">
           <button
-            onClick={() => router.push("/shipping")}
+            onClick={() => router.push('/shipping')}
             type="button"
             className="default-button"
           >
             Back
           </button>
-          <button className="primary-button">Next</button>
+          <button
+            className="primary-button"
+            onClick={() => router.push('/placeorder')}
+          >
+            Next
+          </button>
         </div>
       </form>
     </Layout>

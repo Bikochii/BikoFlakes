@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
-import Link from "next/link";
-import { useState, useEffect } from "react";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import { useRouter } from "next/router";
-import { Store } from "../utils/Store";
+import React, { useContext } from 'react';
+import Link from 'next/link';
+import { useState, useEffect } from 'react';
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
+import { useRouter } from 'next/router';
+import { Store } from '../utils/Store';
 
 export default function Productitem({ product }) {
   const { state, dispatch } = useContext(Store);
@@ -18,13 +18,13 @@ export default function Productitem({ product }) {
     const existItem = state.cart.cartItems.find((x) => x.slug === product.slug);
     const quantity = existItem ? existItem.quantity + 1 : 1;
 
-    dispatch({ type: "CART_ADD_ITEM", payload: { ...product, quantity } });
+    dispatch({ type: 'CART_ADD_ITEM', payload: { ...product, quantity } });
     //router.push("/cart");
   }
 
   useEffect(() => {
     async function fetch() {
-      let { data, error } = await supabase.from("Products").select("*");
+      let { data, error } = await supabase.from('Products').select('*');
       console.log(data);
       setProducts(data);
     }

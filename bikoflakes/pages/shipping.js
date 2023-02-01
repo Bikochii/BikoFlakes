@@ -1,16 +1,12 @@
-import React from "react";
-import Layout from "../components/Layout";
-import MultiStep from "../components/MultiStep";
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/router";
-import { useState } from "react";
+import React from 'react';
+import Layout from '../components/Layout';
+import MultiStep from '../components/MultiStep';
+import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 export default function shipping() {
   const router = useRouter();
-
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [password, setPassword] = useState("");
-  // const [currentStep, setCurrentStep] = useState(0);
 
   const {
     handleSubmit,
@@ -19,7 +15,7 @@ export default function shipping() {
   } = useForm();
 
   const submitHandler = () => {
-    router.push("/payment");
+    router.push('/payment');
   };
 
   return (
@@ -35,10 +31,10 @@ export default function shipping() {
 
           <input
             type="name"
-            {...register("name", {
-              required: "Please enter your name",
+            {...register('name', {
+              required: 'Please enter your name',
               pattern: {
-                message: "Please enter your name",
+                message: 'Please enter your name',
               },
             })}
             className="w-full"
@@ -53,10 +49,10 @@ export default function shipping() {
           <label htmlFor="address">Street address</label>
           <input
             type="address"
-            {...register("address", {
-              required: "Please enter your Streeet address",
+            {...register('address', {
+              required: 'Please enter your Streeet address',
               pattern: {
-                message: "Please enter your Street address",
+                message: 'Please enter your Street address',
               },
             })}
             className="w-full"
@@ -71,10 +67,10 @@ export default function shipping() {
           <label htmlFor="city">Town / City</label>
           <input
             type="city"
-            {...register("city", {
-              required: "Please enter your city",
+            {...register('city', {
+              required: 'Please enter your city',
               pattern: {
-                message: "Please enter your city",
+                message: 'Please enter your city',
               },
             })}
             className="w-full"
@@ -90,11 +86,11 @@ export default function shipping() {
 
           <input
             type="postalCode"
-            {...register("postalCode", {
-              required: "Please enter your Postcode",
+            {...register('postalCode', {
+              required: 'Please enter your Postcode',
               pattern: {
                 value: /\d{5}/i,
-                message: "Invalid Postcode (e.g.: 12345)",
+                message: 'Invalid Postcode (e.g.: 12345)',
               },
             })}
             className="w-full"
@@ -110,11 +106,11 @@ export default function shipping() {
 
           <input
             type="country"
-            {...register("country", {
-              required: "Please enter your country",
+            {...register('country', {
+              required: 'Please enter your country',
               pattern: {
                 value: /[a-zA-Z]{2,}/i,
-                message: "Invalid country",
+                message: 'Invalid country',
               },
             })}
             className="w-full"

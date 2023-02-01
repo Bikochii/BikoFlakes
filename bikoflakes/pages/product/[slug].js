@@ -1,13 +1,13 @@
-import React from "react";
-import Layout from "../../components/Layout";
-import { useRouter } from "next/router";
+import React from 'react';
+import Layout from '../../components/Layout';
+import { useRouter } from 'next/router';
 
-import Link from "next/link";
-import Image from "next/image";
-import { useContext } from "react";
-import { Store } from "../../utils/Store";
-import { useState, useEffect } from "react";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import Link from 'next/link';
+import Image from 'next/image';
+import { useContext } from 'react';
+import { Store } from '../../utils/Store';
+import { useState, useEffect } from 'react';
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
 export default function ProductScreen() {
   const { state, dispatch } = useContext(Store);
@@ -19,7 +19,7 @@ export default function ProductScreen() {
 
   useEffect(() => {
     async function fetch() {
-      let { data, error } = await supabase.from("Products").select("*");
+      let { data, error } = await supabase.from('Products').select('*');
       console.log(data);
       setProducts(data);
     }
@@ -38,8 +38,8 @@ export default function ProductScreen() {
     const existItem = state.cart.cartItems.find((x) => x.slug === product.slug);
     const quantity = existItem ? existItem.quantity + 1 : 1;
 
-    dispatch({ type: "CART_ADD_ITEM", payload: { ...product, quantity } });
-    router.push("/cart");
+    dispatch({ type: 'CART_ADD_ITEM', payload: { ...product, quantity } });
+    router.push('/cart');
   };
 
   return (
@@ -60,7 +60,7 @@ export default function ProductScreen() {
         <div>
           <ul>
             <li>
-              <h1 className="text-lg">{product.name}</h1>{" "}
+              <h1 className="text-lg">{product.name}</h1>{' '}
             </li>
             <li>Category: {product.category} </li>
             <li>Provider: {product.provider}</li>

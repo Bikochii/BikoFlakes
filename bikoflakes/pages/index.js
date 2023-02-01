@@ -1,8 +1,8 @@
-import Layout from "../components/Layout";
-import Productitem from "../components/Productitem";
+import Layout from '../components/Layout';
+import Productitem from '../components/Productitem';
 
-import { useState, useEffect } from "react";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useState, useEffect } from 'react';
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -10,7 +10,7 @@ export default function Home() {
 
   useEffect(() => {
     async function fetch() {
-      let { data, error } = await supabase.from("Products").select("*");
+      let { data, error } = await supabase.from('Products').select('*');
       console.log(data);
       setProducts(data);
     }
