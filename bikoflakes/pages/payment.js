@@ -1,19 +1,16 @@
-import React from 'react';
-import MultiStep from '../components/MultiStep';
-import Layout from '../components/Layout';
-import { useForm } from 'react-hook-form';
-import { useRouter } from 'next/router';
+import React from "react";
+import MultiStep from "../components/MultiStep";
+import Layout from "../components/Layout";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
 
 export default function payment() {
   const router = useRouter();
 
-  const submitHandler = () => {
-    router.push('/placeorder');
-  };
   return (
     <Layout title="Payment Option">
       <MultiStep activeStep={1} />
-      <form className="mx-auto max-w-screen-md" onSubmit={submitHandler}>
+      <div className="mx-auto max-w-screen-md">
         <h1 className="mb-6 text-xl">Payment Option</h1>
 
         <div className="mb-4">
@@ -51,7 +48,7 @@ export default function payment() {
 
         <div className="mb- flex justify-between">
           <button
-            onClick={() => router.push('/shipping')}
+            onClick={() => router.push("/shipping")}
             type="button"
             className="default-button"
           >
@@ -59,12 +56,12 @@ export default function payment() {
           </button>
           <button
             className="primary-button"
-            onClick={() => router.push('/placeorder')}
+            onClick={() => router.push("/placeorder")}
           >
             Next
           </button>
         </div>
-      </form>
+      </div>
     </Layout>
   );
 }

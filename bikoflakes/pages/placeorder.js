@@ -1,15 +1,23 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import React, { useContext } from 'react';
-import Layout from '../components/Layout';
-import MultiStep from '../components/MultiStep';
-import { Store } from '../utils/Store';
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React, { useContext, useEffect, useState } from "react";
+import Layout from "../components/Layout";
+import MultiStep from "../components/MultiStep";
+import { Store } from "../utils/Store";
 
 export default function PlaceOrderScreen() {
   const router = useRouter();
   const { state } = useContext(Store);
   const { cart } = state;
   const { cartItems } = cart;
+
+  const [placeholder, setPlaceholder] = useState([]);
+
+  useEffect(() => {
+    setPlaceholder(cartItems);
+
+    return () => {};
+  }, [cartItems]);
 
   return (
     <Layout title="Place Order">
@@ -47,7 +55,7 @@ export default function PlaceOrderScreen() {
                 </tr>
               </thead>
               <tbody>
-                {cartItems.map((item) => (
+                {placeholder.map((item) => (
                   <tr key={item._id} className="border-b">
                     <td>
                       <Link href={`/product/${item.slug}`}>
@@ -97,7 +105,7 @@ export default function PlaceOrderScreen() {
               <li>
                 <button
                   className="primary-button w-full"
-                  onClick={() => router.push('/')}
+                  onClick={() => router.push("/")}
                 >
                   Place Order
                 </button>
